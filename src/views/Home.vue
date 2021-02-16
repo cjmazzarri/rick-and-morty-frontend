@@ -9,6 +9,7 @@ export default {
   name: 'Home',
 }
 </script>
+
 <style scoped lang="scss">
   h1 {
     font-size: 8rem;

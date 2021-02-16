@@ -1,0 +1,14 @@
+# QUERY FOR EPISODES LIST BY SEASON
+# eg: seasonId = "S01"
+query EpisodesBySeason ($seasonId: String) {
+  episodes (page: 1, filter: {episode: $seasonId} ) {
+    info {
+      count
+    }
+    results {
+      name,
+      air_date,
+      episode
+    }
+  }
+}

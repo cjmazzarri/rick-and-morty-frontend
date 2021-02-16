@@ -1,0 +1,18 @@
+{
+    "short_name": "R And M",
+    "name": "Rick And Morty",
+    "icons": [
+        {
+            "src": "portal.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "#070B28",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#00D3FF",
+    "description": "Rick And Morty Encyclopedia"
+}
