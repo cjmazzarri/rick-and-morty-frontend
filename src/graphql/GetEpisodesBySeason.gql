@@ -6,6 +6,7 @@ query EpisodesBySeason ($seasonId: String) {
       count
     }
     results {
+      id,
       name,
       air_date,
       episode
