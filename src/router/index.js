@@ -16,17 +16,31 @@ const routes = [
     component: () => import('../components/Characters')
   },
   {
+    path: '/characters/:id',
+    name: 'CharacterDetails',
+    component: () => import('../components/CharacterDetails')
+  },
+  {
     path: '/episodes',
     name: 'Episodes',
     component: () => import('../components/Episodes')
+  },
+  {
+    path: '/episodes/:id',
+    name: 'EpisodeDetails',
+    component: () => import('../components/EpisodeDetails')
   },
   {
     path: '/locations',
     name: 'Locations',
     component: () => import('../components/Locations')
   },
+  {
+    path: '/locations/:id',
+    name: 'LocationDetails',
+    component: () => import('../components/LocationDetails')
+  },
 ]
-
 
 const router = new VueRouter({
   mode: 'history',
@@ -34,4 +48,4 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+export default router;
