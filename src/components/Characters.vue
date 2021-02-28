@@ -1,23 +1,26 @@
 <template>
   <div class="main">
     <div class="characters">
-      <div class="char-card" v-for="(character, index) in this.characters.results" :key="index">
+      <div
+        class="char-card"
+        v-for="(character, index) in this.characters.results"
+        :key="index">
         <div class="top">
-          <img class="image" :src="character.image">
+          <img class="image" :src="character.image" />
         </div>
         <div class="bottom">
-          {{character.name}}
-        </div>       
-      </div>
+          {{ character.name }}
+        </div>
+      </div>      
     </div>
   </div>
-  <!--TODO: Paginacion!-->
 </template>
 
 <style scoped lang="scss">
 .main{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: auto;
   width: 100%;
   position: absolute;
@@ -39,7 +42,7 @@
   height: 42.04vh;
   border-radius: 20px;
   min-width: 20%;
-  
+
   .top{
     height: 80%;
   }
@@ -63,14 +66,13 @@
 </style>
 
 <script>
-import Vue from "vue";
 import gql from "graphql-tag";
 export default {
   name: "Characters",
   apollo: {
     characters: {
       query: gql`
-        query CharactersByPage($page: Int!){
+        query CharactersByPage($page: Int!) {
           characters(page: $page) {
             info {
               pages
@@ -85,16 +87,16 @@ export default {
       `,
       variables() {
         return {
-          page: this.page
-        }
-      }
+          page: this.page,
+        };
+      },
     },
   },
-  data (){
+  data() {
     return {
       page: 1,
-      characters: []
-    }
-  }
+      characters: []      
+    };
+  },
 };
 </script>
