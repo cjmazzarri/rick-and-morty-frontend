@@ -13,6 +13,7 @@ export default {
 <style scoped lang="scss">
   h1 {
     font-size: 8rem;
+    text-align: center;
     font-family: 'Freestyle Script Regular';
     margin-bottom: 4rem;
     -webkit-text-stroke: 1px #00D3FF;
