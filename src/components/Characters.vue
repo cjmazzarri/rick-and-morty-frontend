@@ -1,14 +1,14 @@
 <template>
   <div class="main">
-    <div class="load" v-if="$apollo.loading">
-        <img src="/src/assets/portal.png" class="loading" v-if="$apollo.loading" />
+    <div class="load" v-if="!$apollo.loading">
+        <img src="../assets/portal.png" class="loading-pic">
       </div>
     <div v-if="!$apollo.loading" class="pagination-top">
       <button class="page-btn" @click="prevPage">Previous</button>
       <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
       <button class="page-btn" @click="nextPage">Next</button>
     </div>
-    <div class="characters">      
+    <div v-if="!$apollo.loading" class="characters">      
       <div
         class="char-card"
         v-for="(character, index) in this.characters.results"
@@ -78,13 +78,9 @@
   }
 }
 
-.loading {
+.loading-pic {
   //TODO: Center and size properly
-    width: 25%;
-    animation: rotation 2s linear infinite;
-    position: absolute;    
-    display: flex;
-    align-items: center;
+    animation: rotation 15s linear infinite;     
   }
   @keyframes rotation {
       0% {
@@ -97,6 +93,9 @@
 
 .load{
   height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
 }
 
 .pagination-bot{
@@ -150,7 +149,7 @@ export default {
       `,
       variables() {
         return {
-          page: this.page,
+          page: this.page
         };
       },
     },
