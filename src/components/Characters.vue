@@ -3,6 +3,11 @@
     <div class="load" v-if="$apollo.loading">
         <img src="../assets/portal.png" class="loading" v-if="$apollo.loading" />
       </div>
+    <div v-if="!$apollo.loading" class="pagination-top">
+      <button class="page-btn" @click="prevPage">Previous</button>
+      <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
+      <button class="page-btn" @click="nextPage">Next</button>
+    </div>
     <div class="characters">      
       <div
         class="char-card"
@@ -17,10 +22,10 @@
         </div>
       </div>
     </div>
-    <div v-if="!$apollo.loading" class="pagination">
-      <button class="page-btn" @click="prevPage">prev</button>
-      <p>{{ this.page }}</p>
-      <button class="page-btn" @click="nextPage">next</button>
+    <div v-if="!$apollo.loading" class="pagination-bot">
+      <button class="page-btn" @click="prevPage">Previous</button>
+      <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
+      <button class="page-btn" @click="nextPage">Next</button>
     </div>
   </div>
 </template>
@@ -94,8 +99,31 @@
   height: 100vh;
 }
 
-.pagination{
-  //TODO: Add styles
+.pagination-bot{
+  display: grid;
+  place-items: center;
+  grid-template-columns: 40% auto 40%;
+  width: 100%;
+  padding-top: 2vh;
+}
+
+.pagination-top{
+  display: grid;
+  place-items: center;
+  grid-template-columns: 40% auto 40%;
+  width: 100%;
+  padding-bottom: 2vh;
+}
+
+.page-btn{
+  background-color: #1a1f47;
+  border-color: #00d3ff;
+  border-radius: 10px;
+  color: #00d3ff;
+  font-size: 1rem;
+  font-family: 'Gilroy';
+  
+  
 }
 </style>
 
