@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="load" v-if="$apollo.loading">
-        <img src="../assets/portal.png" class="loading" v-if="$apollo.loading" />
+        <img src="/src/assets/portal.png" class="loading" v-if="$apollo.loading" />
       </div>
     <div v-if="!$apollo.loading" class="pagination-top">
       <button class="page-btn" @click="prevPage">Previous</button>
