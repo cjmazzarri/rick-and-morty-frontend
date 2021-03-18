@@ -1,14 +1,19 @@
 <template>
   <div class="main">
     <div class="load" v-if="$apollo.loading">
-        <img src="../assets/portal.png" class="loading" v-if="$apollo.loading" />
+        <img src="../assets/portal.png" class="loading-pic">
+        <p>Loading...</p>
       </div>
     <div v-if="!$apollo.loading" class="pagination-top">
-      <button class="page-btn" @click="prevPage">Previous</button>
+      <button class="page-btn" v-if="this.page > 1" @click="prevPage">Previous</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7"
+      @click="prevPage">Previous</button>
       <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
-      <button class="page-btn" @click="nextPage">Next</button>
+      <button class="page-btn" v-if="this.page < this.characters.info.pages" @click="nextPage">Next</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7" 
+      @click="nextPage">Next</button>
     </div>
-    <div class="characters">      
+    <div v-if="!$apollo.loading" class="characters">      
       <div
         class="char-card"
         v-for="(character, index) in this.characters.results"
@@ -23,9 +28,13 @@
       </div>
     </div>
     <div v-if="!$apollo.loading" class="pagination-bot">
-      <button class="page-btn" @click="prevPage">Previous</button>
+      <button class="page-btn" v-if="this.page > 1" @click="prevPage">Previous</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7"
+      @click="prevPage">Previous</button>
       <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
-      <button class="page-btn" @click="nextPage">Next</button>
+      <button class="page-btn" v-if="this.page < this.characters.info.pages" @click="nextPage">Next</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7" 
+      @click="nextPage">Next</button>
     </div>
   </div>
 </template>
@@ -51,9 +60,8 @@
 
 .char-card {
   background: #1a1f47;
-  border: 0.45vh solid #00d3ff;
-  //width: 19.05vw;
-  height: 42.04vh;
+  border: 0.45vh solid rgb(135, 161, 167);
+  min-height: 42.04vh;
   border-radius: 20px;
   min-width: 20%;
 
@@ -62,7 +70,7 @@
   }
 
   .bottom {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     display: flex;
     text-align: center;
     height: 20%;
@@ -78,13 +86,10 @@
   }
 }
 
-.loading {
+.loading-pic {
   //TODO: Center and size properly
-    width: 25%;
-    animation: rotation 2s linear infinite;
-    position: absolute;    
-    display: flex;
-    align-items: center;
+    animation: rotation 1.5s linear infinite;
+    width: 25vw;
   }
   @keyframes rotation {
       0% {
@@ -96,7 +101,13 @@
     }
 
 .load{
-  height: 100vh;
+  margin-top: 10vh;
+  height: 70vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 50% 48%;
+  font-size: 1.75rem;
 }
 
 .pagination-bot{
@@ -122,8 +133,6 @@
   color: #00d3ff;
   font-size: 1rem;
   font-family: 'Gilroy';
-  
-  
 }
 </style>
 
@@ -150,7 +159,7 @@ export default {
       `,
       variables() {
         return {
-          page: this.page,
+          page: this.page
         };
       },
     },
