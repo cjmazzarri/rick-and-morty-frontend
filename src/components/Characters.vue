@@ -5,13 +5,21 @@
         <p>Loading...</p>
       </div>
     <div v-if="!$apollo.loading" class="pagination-top">
+      <button class="page-btn" v-if="this.page != 1" @click="firstPage">First</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7">First</button>
+
       <button class="page-btn" v-if="this.page > 1" @click="prevPage">Previous</button>
-      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7"
-      @click="prevPage">Previous</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7">Previous</button>
+
       <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
+
       <button class="page-btn" v-if="this.page < this.characters.info.pages" @click="nextPage">Next</button>
-      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7" 
-      @click="nextPage">Next</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7">Next</button>
+
+      <button class="page-btn" v-if="this.page != this.characters.info.pages" @click="lastPage">Last</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7"
+      @click="lastPage">Last</button>
+
     </div>
     <div v-if="!$apollo.loading" class="characters">      
       <div
@@ -28,13 +36,20 @@
       </div>
     </div>
     <div v-if="!$apollo.loading" class="pagination-bot">
+      <button class="page-btn" v-if="this.page != 1" @click="firstPage">First</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7">First</button>
+
       <button class="page-btn" v-if="this.page > 1" @click="prevPage">Previous</button>
-      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7"
-      @click="prevPage">Previous</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7">Previous</button>
+
       <p>Page {{ this.page }} of {{this.characters.info.pages}}</p>
+
       <button class="page-btn" v-if="this.page < this.characters.info.pages" @click="nextPage">Next</button>
-      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7" 
-      @click="nextPage">Next</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7">Next</button>
+
+      <button class="page-btn" v-if="this.page != this.characters.info.pages" @click="lastPage">Last</button>
+      <button class="page-btn" v-else disabled style="color: #87a1a7; border-color: #87a1a7"
+      @click="lastPage">Last</button>
     </div>
   </div>
 </template>
@@ -60,7 +75,7 @@
 
 .char-card {
   background: #1a1f47;
-  border: 0.45vh solid rgb(135, 161, 167);
+  border: 0.45vh solid #00d3ff;
   min-height: 42.04vh;
   border-radius: 20px;
   min-width: 20%;
@@ -87,7 +102,6 @@
 }
 
 .loading-pic {
-  //TODO: Center and size properly
     animation: rotation 1.5s linear infinite;
     width: 25vw;
   }
@@ -113,7 +127,7 @@
 .pagination-bot{
   display: grid;
   place-items: center;
-  grid-template-columns: 40% auto 40%;
+  grid-template-columns: 20% 2% auto 2% 20%;
   width: 100%;
   padding-top: 2vh;
 }
@@ -121,7 +135,7 @@
 .pagination-top{
   display: grid;
   place-items: center;
-  grid-template-columns: 40% auto 40%;
+  grid-template-columns: 20% 2% auto 2% 20%;
   width: 100%;
   padding-bottom: 2vh;
 }
@@ -133,6 +147,7 @@
   color: #00d3ff;
   font-size: 1rem;
   font-family: 'Gilroy';
+
 }
 </style>
 
@@ -185,6 +200,21 @@ export default {
         console.log(this.page);
       }
     },
+    firstPage(){
+      if (this.page != 1){
+        this.characters = [];
+        this.page = 1;
+        console.log(this.page);
+      }
+    },
+    lastPage(){
+      if (this.page != this.characters.info.pages){        
+        let pages = this.characters.info.pages;
+        this.characters = [];
+        this.page = pages;
+        console.log(this.page);
+      }
+    }
   },
 };
 </script>
